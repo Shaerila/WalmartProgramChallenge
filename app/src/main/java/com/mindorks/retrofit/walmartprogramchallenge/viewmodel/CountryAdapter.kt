@@ -1,4 +1,4 @@
-package com.mindorks.retrofit.walmartprogramchallenge.helper
+package com.mindorks.retrofit.walmartprogramchallenge.viewmodel
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.mindorks.retrofit.walmartprogramchallenge.network
+package com.mindorks.retrofit.walmartprogramchallenge.model.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

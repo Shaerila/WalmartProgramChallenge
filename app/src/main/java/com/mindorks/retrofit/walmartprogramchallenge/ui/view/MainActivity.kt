@@ -1,18 +1,17 @@
-package com.mindorks.retrofit.walmartprogramchallenge.view
+package com.mindorks.retrofit.walmartprogramchallenge.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mindorks.retrofit.walmartprogramchallenge.R
 import com.mindorks.retrofit.walmartprogramchallenge.databinding.ActivityMainBinding
-import com.mindorks.retrofit.walmartprogramchallenge.helper.CountryAdapter
-import com.mindorks.retrofit.walmartprogramchallenge.network.RetrofitObject
+import com.mindorks.retrofit.walmartprogramchallenge.viewmodel.CountryAdapter
+import com.mindorks.retrofit.walmartprogramchallenge.model.network.RetrofitObject
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
-import java.net.HttpCookie
 
 const val TAG = "MainActivity"
 
@@ -32,9 +31,11 @@ class MainActivity : AppCompatActivity() {
             val response = try {
                 RetrofitObject.api.getCountryInfo()
             } catch (e: IOException) {
+                Toast.makeText(this@MainActivity,"IOException, No Internet or incorrect URL", Toast.LENGTH_LONG).show()
                 Log.d(TAG, "IOException")
                 return@launch
             } catch (e: HttpException){
+                Toast.makeText(this@MainActivity,"HttpException, Response not what expected", Toast.LENGTH_LONG).show()
                 Log.d(TAG, "HttpException, Response not what expected")
                 return@launch
             }
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity() {
             if(response.isSuccessful && response.body() != null){
                 countryAdapter.countryInfoItem = response.body()!!
             } else {
+                Toast.makeText(this@MainActivity,"Response Not Found", Toast.LENGTH_LONG).show()
                 Log.d(TAG, "Response Not Found")
             }
         }
